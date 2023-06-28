@@ -1,5 +1,5 @@
 #!/bin/bash
 
-DELAY=1
+DELAY=5
 
 xautolock -time $DELAY -locker lock
