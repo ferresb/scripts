@@ -7,7 +7,7 @@ WORKPATH=$ROOT/work
 TARGET=$ROOT/tmp/archive_$DATE
 TARGET_ROOT=$TARGET/root
 
-FILES=(".bash_aliases" ".bashrc" ".vimrc" ".vim" ".ssh" ".mozilla")
+FILES=(".bash_aliases" ".bashrc" ".vimrc" ".vim" ".ssh" ".mozilla" "keepass" ".config/awesome" "Documents")
 
 cp -r "$WORKPATH" "$TARGET"
 mkdir $TARGET_ROOT
