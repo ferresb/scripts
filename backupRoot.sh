@@ -7,7 +7,7 @@ WORKPATH=$ROOT/work
 TARGET=$ROOT/tmp/archive_$DATE
 TARGET_ROOT=$TARGET/root
 
-FILES=(".bash_aliases" ".bashrc" ".vimrc" ".vim" ".ssh" "keepass" ".config/awesome" "Documents")
+FILES=(".bash_aliases" ".bashrc" ".vimrc" ".vim" ".gitconfig" ".ssh" "keepass" ".screenlayout" ".config/awesome" "Documents")
 
 PROGRAM_DIR=$ROOT/program
 PROGRAM_LIST=`ls $PROGRAM_DIR`
