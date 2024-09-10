@@ -1,5 +1,16 @@
 #!/bin/bash
 
+PROCESS_NAME=myLookup
+
+COUNT_P=`ps -aux | grep $PROCESS_NAME | grep -v grep | wc -l`
+
+# 2 because ps is forking process
+if [ $COUNT_P -gt 2 ];
+then
+    echo "Already running. Exiting"
+    exit 0;
+fi
+
 if [ -z "$1" ];
 then
     TIME="30m"
