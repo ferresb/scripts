@@ -26,6 +26,9 @@ HAS_9=$?
 has "10"
 HAS_10=$?
 
+has "11"
+HAS_11=$?
+
 if [ $HAS_8 -eq 1 -a $HAS_9 -eq 1 ];
 then
     xrandr --output eDP --off --output HDMI-A-0 --off --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DisplayPort-6 --off --output DisplayPort-7 --off --output DisplayPort-8 --primary --mode 2560x1440 --pos 0x0 --rotate normal --output DisplayPort-9 --mode 2560x1440 --pos 2560x0 --rotate normal --output DisplayPort-10 --off
@@ -47,5 +50,12 @@ then
     exit 0
 fi
 
-echo "No available confif. Aborting."
+if [ $HAS_10 -eq 1 -a $HAS_11 -eq 1 ];
+then
+    xrandr --output eDP --off --output HDMI-A-0 --off --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DisplayPort-6 --off --output DisplayPort-7 --off --output DisplayPort-8 --off --output DisplayPort-9 --off --output DisplayPort-10 --primary --mode 2560x1440 --pos 0x0 --rotate normal --output DisplayPort-11 --mode 2560x1440 --pos 2560x0 --rotate normal
+    echo "10++11"
+    exit 0
+fi
+
+echo "No available config. Aborting."
 exit 1
