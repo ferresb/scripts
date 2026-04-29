@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import bibtexparser
+from bibtexparser.bparser import BibTexParser
 import os
 import argparse
 from wordcloud import WordCloud
@@ -9,23 +10,32 @@ import numpy as np
 from PIL import Image
 
 """
-handle special cases here
+handle special cases here (e.g. non uniform names for a single author)
 """
 def special_rules(name):
     if "Khosravian" in name:
         return "Khosravian"
     return name
 
+"""
+replace accents and special characters for printing
+"""
+def sanitize_authors(authors):
+    return authors.replace("\n", " ").replace("{\\'e}", "é").replace("{\\'E}", "E")
+
 def parse(args):
     input_name = args.bibtex
     output_name = args.out
     authors=dict()
+    parser = BibTexParser()
+    # handle non standard types such as 'online'
+    parser.ignore_nonstandard_types = False
     with open(input_name) as bibtex_file:
-        database = bibtexparser.load(bibtex_file)
+        database = bibtexparser.load(bibtex_file, parser)
         # assume misc entries should not be plotted
         for e in [x for x in database.entries if x.get('ENTRYTYPE') != 'misc']:
-            author_string = e.get('author')
-            author_list = [(special_rules(x.split(",")[0].strip()), special_rules(x.split(",")[1].strip()[0])) for x in author_string.split("and")]
+            author_string = sanitize_authors(e.get('author'))
+            author_list = [(special_rules(x.split(",")[0].strip()), special_rules(x.split(",")[1].strip()[0])) for x in author_string.split(" and ")]
             if (args.first):
                 author_list = [y + ". " + x for (x, y) in author_list]
             else:
